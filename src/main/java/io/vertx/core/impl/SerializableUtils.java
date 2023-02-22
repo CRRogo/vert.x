@@ -10,7 +10,6 @@
  */
 
 package io.vertx.core.impl;
-import io.openpixee.security.ObjectInputFilters;
 
 import java.io.*;
 
@@ -35,7 +34,6 @@ public class SerializableUtils {
   public static Object fromBytes(byte[] bytes, ObjectInputStreamFactory factory) {
     ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
     try (ObjectInputStream ois = factory.create(bais)) {
-      ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
       return ois.readObject();
     } catch (IOException | ClassNotFoundException e) {
       throw new RuntimeException(e);
